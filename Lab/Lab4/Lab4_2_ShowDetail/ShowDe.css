@@ -1,0 +1,24 @@
+body{
+    border-left: 10px solid transparent;
+    background-image: linear-gradient(to right, rgb(153, 60, 60) , rgb(202, 144, 57));
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+h1{
+    color: rgb(227, 214, 241);
+}
+h2{
+    color: rgb(154, 237, 243);
+    border-style: solid;
+    border-radius: 5px;
+    border-color: rgb(231, 219, 163);
+}
+
+article{
+    color: rgb(135, 238, 149);
+    border-left: 15px solid transparent
+}
+
+.hidden{
+    display: none;
+}

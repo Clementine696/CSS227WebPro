@@ -1,0 +1,39 @@
+body{
+    border-left: 10px solid transparent;
+    background-image: linear-gradient(to right, #baffc9 , #bae1ff);
+    font-family: 'Roboto Condensed', sans-serif;
+    color: rgb(0, 0, 0);
+}
+
+#parent{
+    position: absolute;
+    top: 5%;
+    width: 93%;
+    border-style:solid;
+    border-radius: 20px;
+    border-color: #ffb3ba;
+    padding: 10px 20px;
+}
+
+#child{
+    border-style: solid;
+    border-radius: 20px;
+    border-color: #ffffba;
+    padding: 10px 20px;
+}
+
+.fill1{
+    background-color: #ffb3ba;
+}
+
+.fill2{
+    background-color: #ffffba;
+}
+
+.btn{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    border-radius: 15px;
+    padding: 10px;
+}
