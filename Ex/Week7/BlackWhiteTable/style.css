@@ -1,0 +1,37 @@
+body{
+    font-family: 'Roboto Condensed', sans-serif;
+    background-image: linear-gradient(to left, rgb(223, 253, 253) , rgb(184, 238, 182));
+}
+
+h1{
+    text-align: center;
+    color: rgb(192, 28, 25);
+}
+
+/* div{
+    margin-top: 100px;
+} */
+
+table{
+    margin-top: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+    /* border: 3px solid white; */
+    outline: 20px solid gray;
+}
+
+td{
+    border: 3px solid white;
+    height: 100px;
+    width: 100px;
+    font-size: 80px;
+    font-style: thin;
+    text-align: center;
+    background-color: white;
+}
+
+.color--black{
+    background-color: black;
+    content: "";
+}
