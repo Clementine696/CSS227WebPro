@@ -1,0 +1,18 @@
+<%- include("../partials/header.ejs") %>
+
+<h1><%= print.name %></h1>
+<img src="<%= print.image %>" height="400px">
+<p>Artist: <%= print.Artist %></p>
+
+<p>Submitted by <%=print.author.username%> </p>
+
+<h2>Comments:</h2>
+<% print.comments.forEach(function(comment){ %>
+    <p>
+        <strong> <%=comment.author.username%> </strong> - <%=comment.text%>
+    </p>
+<% }) %>
+
+<a href="/prints/<%= print._id %>/comments/new" class="btn btn-sm btn-outline-secondary">Add new comment</a>
+
+<%- include("../partials/footer.ejs") %>

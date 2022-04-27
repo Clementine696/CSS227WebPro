@@ -1,42 +1,49 @@
-const express = require("express"),
-	  app = express(),
-	  bodyParser = require("body-parser");
-	  
+const req = require("express/lib/request");
+
+const	express		= require("express"),
+		app 		= express(),
+		bodyParser 	= require("body-parser"),
+		mongoose 	= require('mongoose'),
+		passport	= require('passport'),
+		LocalStrategy = require('passport-local');
+		Print       = require('./models/print'),	//Database
+        Comment     = require('./models/comment'),	//Database
+		User		= require('./models/user'),		//Database
+		seedDB		= require('./seeds');			//Database
+
+const	indexRoutes = require('./routes/index'),
+		printRoutes = require('./routes/prints'),
+		commentRoutes = require('./routes/comments');
+
+mongoose.connect('mongodb://localhost/ProjectExample');
 app.set("view engine","ejs");
 app.use(express.static("./public"));
-app.use(bodyParser.urlencoded({
-	extended: true
+app.use(bodyParser.urlencoded({extended: true}));
+
+//If finished, jest comment this
+// seedDB(); 
+
+app.use(require('express-session')({
+	secret: 'secret word',
+	resave: false,
+	saveUninitialized: false
 }));
 
-const prints = [
-	{name:"Ironman", Artist:"Patum", url:"https://play.gxc.gg/game/6703cbbd-598c-45b2-8fb0-85190df9890e/graphic/986a427f-f85d-4868-964e-a3dc032af374?dfbbc76d138f5f4f98c74afa28020835"},
-	{name:"Ironman2", Artist:"Patum", url:"https://play.gxc.gg/game/6703cbbd-598c-45b2-8fb0-85190df9890e/graphic/c1fca3ad-ca2a-44d1-97d8-f57a0b423bff?db0a258d88915f646d4bb0354deb6d7f"},
-	{name:"Ironman3", Artist:"Patum", url:"https://play.gxc.gg/game/6703cbbd-598c-45b2-8fb0-85190df9890e/graphic/5f7f6e2f-633c-437e-b1c2-d0dee3f77f2f?6d403688376b1d973d4a2911f652c41a"},
-	{name:"Ironman4", Artist:"Patum", url:"https://play.gxc.gg/game/6703cbbd-598c-45b2-8fb0-85190df9890e/graphic/5f7f6e2f-633c-437e-b1c2-d0dee3f77f2f?6d403688376b1d973d4a2911f652c41a"}
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-];
-
-app.get("/", function(req, res){
-	res.render("landing.ejs");
+app.use(function(req, res, next){
+	res.locals.currentUser = req.user;
+	next();
 });
 
-app.get("/prints", function(req, res){
-	res.render("index.ejs",{prints:prints});
-});
+app.use('/', indexRoutes);
+app.use('/prints', printRoutes);
+app.use('/prints/:id/comments', commentRoutes);
 
-app.post("/prints", function(req, res){
-	let name = req.body.name;
-	let Artist = req.body.Artist;
-	let url = req.body.url;
-	let newPrint = {name:name, Artist:Artist, url:url};
-	prints.push(newPrint);
-	res.render("index.ejs",{prints:prints});
-})
-
-app.get("/prints/new", function(req, res){
-	res.render("new.ejs");
-});
-
-app.listen(3000, function(){
+app.listen(4000, function(){
 		console.log("Activated");
 });
