@@ -1,18 +1,15 @@
 <%- include("../partials/header.ejs") %>
 
-<h1><%= product.name %></h1>
-<img src="<%= product.image %>" height="400px">
-<p>Price: <%= product.price %></p>
+<h1 class="Show"><%= product.name %></h1>
+<img src="<%= product.image %>" height="320px">
+<p>Price: <%= product.price %>฿</p>
 
-<!-- <p>Submitted by <%=print.author.username%> </p> -->
+<h2>Description:</h2>
 
-<!-- <h2>Comments:</h2>
-<% print.comments.forEach(function(comment){ %>
-    <p>
-        <strong> <%=comment.author.username%> </strong> - <%=comment.text%>
-    </p>
-<% }) %> -->
-
-<!-- <a href="/prints/<%= print._id %>/comments/new" class="btn btn-sm btn-outline-secondary">Add new comment</a> -->
+<ul>
+<% product.description.forEach(function(description){ %>
+        <li> <%=description%> </li>
+<% }) %>
+</ul>
 
 <%- include("../partials/footer.ejs") %>

@@ -6,6 +6,8 @@ const	express		= require("express"),
 		mongoose 	= require('mongoose'),
 		passport	= require('passport'),
 		LocalStrategy = require('passport-local');
+		flash		= require('connect-flash'),
+		methodOverride = require('method-override'),
 		Print       = require('./models/print'),	//Database
         Comment     = require('./models/comment'),	//Database
 		User		= require('./models/user'),		//Database
@@ -19,7 +21,8 @@ mongoose.connect('mongodb://localhost/ProjectExample');
 app.set("view engine","ejs");
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({extended: true}));
-
+app.use(methodOverride('_method'));
+app.use(flash());
 //If finished, jest comment this
 // seedDB(); 
 
@@ -37,6 +40,8 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use(function(req, res, next){
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash('error');
+	res.locals.success = req.flash('success');
 	next();
 });
 

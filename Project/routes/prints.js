@@ -17,6 +17,7 @@ const   express = require('express'),
 			callback(null, true);
 		},
 		upload = multer({storage:storage, fileFilter:imageFilter}),
+		middleware = require('../middleware'),
         Print   = require('../models/print');
 
 router.get("/", function(req, res){
@@ -29,7 +30,7 @@ router.get("/", function(req, res){
 	});
 });
 
-router.post("/", upload.single('image'), function(req, res){
+router.post("/",middleware.isLoggedIn, upload.single('image'), function(req, res){
 	req.body.print.image = '/upload/' + req.file.filename;
 	req.body.print.author = {
 		id: req.user._id,
@@ -56,7 +57,7 @@ router.post("/", upload.single('image'), function(req, res){
 	});
 });
 
-router.get("/new", function(req, res){
+router.get("/new",middleware.isLoggedIn, function(req, res){
 	res.render("print/new.ejs");
 });
 
@@ -69,5 +70,38 @@ router.get("/:id", function(req, res){
 		}
 	});
 });
+
+router.get("/:id/edit", middleware.checkPrintOwner, function(req, res){
+	Print.findById(req.params.id, function(err, foundPrint){
+		if(err){
+			console.log(err);
+		}else{
+			res.render('print/edit.ejs', {print: foundPrint});
+		}
+	});
+});
+
+router.put('/:id', upload.single('image'), function(req, res){
+	if(req.file){
+		req.body.print.image = '/upload/' + req.file.filename;
+	}
+	Print.findByIdAndUpdate(req.params.id, req.body.print, function(err, updatedPrint){
+		if(err){
+			console.log(err);
+			res.redirect('/prints/');
+		}else{
+			res.redirect('/prints/' + req.params.id);
+		}
+	});
+});
+
+router.delete('/:id', middleware.checkPrintOwner, function(req, res){
+	Print.findByIdAndRemove(req.params.id, function(err){
+		if(err){
+			console.log(err);
+		}
+		res.redirect('/prints');
+	})
+})
 
 module.exports = router;
