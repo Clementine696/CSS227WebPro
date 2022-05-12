@@ -19,8 +19,11 @@
       <div class="col">
         <div class="card h-100 shadow-sm"> <img src="<%= products.image %>" class="card-img" alt="...">
             <div class="card-body">
-                <div class="label-top shadow-sm">Asus Rog</div>
-                <div class="clearfix mb-3"> <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span> <span class="float-end price-hp"><%= products.price %>฿</span> </div>
+                <!-- <div class="label-top shadow-sm">Asus Rog</div> -->
+                <div class="clearfix mb-3"> 
+                  <!-- <span class="float-start badge rounded-pill bg-primary">ASUS Rog</span>  -->
+                  <span class="float-end price-hp"><%= products.price %>฿</span> 
+                </div>
                 <h5 class="card-title"><%= products.name %></h5>
                 <div class="text-center my-4"> <a href="/products/<%= products._id %>" class="btn btn-warning">Check offer</a> </div>
             </div>

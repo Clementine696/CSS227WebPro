@@ -5,11 +5,37 @@
 <p>Price: <%= product.price %>฿</p>
 
 <h2>Description:</h2>
+<textarea readonly class="textarea-product" rows="6" cols="60"><%= product.description %></textarea>
 
-<ul>
-<% product.description.forEach(function(description){ %>
-        <li> <%=description%> </li>
-<% }) %>
-</ul>
+<%if (currentUser && currentUser.isAdmin) { %>
+        <a href="/products/<%= product._id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+        
+        <form id="delete-form" action ="/products/<%= product._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Make Sure Check Duay</button>
+        </form>
+<% }else{ %>
+
+        //TODO:
+        <!-- <a href="/products/<%= product._id %>/addtocart" class="btn btn-sm btn-outline-secondary">Add to basket</a> -->
+
+        <button class="input-qty-button" id="input-minus">-</button>
+        <!-- <input type="number" class="col-sm-2" id ="input-count" value = "1"> -->
+        <span class="col-sm-2" id ="input-count" name="input_count">1</span>
+        <button class="input-qty-button" id="input-plus">+</button>
+
+
+
+        <form action="/products/<%= product._id %>/addtocart" method="POST">
+                <div class="mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number" class="form-control" id="QTY" name="QTY" value="1">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add to basket</button>
+                <a href="/products" >Go back</a>
+        </form>
+
+
+<% } %>
 
 <%- include("../partials/footer.ejs") %>

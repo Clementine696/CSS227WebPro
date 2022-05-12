@@ -1,0 +1,28 @@
+<%- include("../partials/header.ejs") %>
+
+<h1>Hi <%= user.username%></h1>
+
+<a href="/user/<%= user._id %>/new_address" class="btn btn-sm btn-outline-secondary">Add new delivery address</a>
+
+<%if(user.addresses)%>
+    <p>You have address <%=user.addresses.length%> address</p>
+
+<% user.addresses.forEach(function(address){ %>
+
+    <a href="/user/<%= user._id %>/<%= address._id %>/edit" class="btn btn-sm btn-outline-secondary">Edit</a>
+        
+    <form id="delete-form" action ="/user/<%= user._id %>/<%= address._id %>?_method=DELETE" method="POST">
+        <button type="submit" class="btn btn-sm btn-outline-secondary">Delete Make Sure Check Duay</button>
+    </form>
+
+    <p> address : <%=address.houseaddress%> </p>
+    <p> sub-district : <%=address.sub_district%> </p>
+    <p> district : <%=address.district%> </p>
+    <p> province : <%=address.province%> </p>
+    <p> zipcode : <%=address.zipcode%> </p>
+
+    <br>
+<% }) %>
+
+
+<%- include("../partials/footer.ejs") %>

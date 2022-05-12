@@ -1,0 +1,42 @@
+<%- include("../partials/header.ejs") %>
+
+<h1>Your Basket</h1>
+
+<% user.carts.forEach(function(cart){ %>
+
+    <% products.forEach(function(product){ %>
+
+
+        <% if(cart.product._id.equals(product._id)){ %>
+
+            <div class="Cart-Container">
+
+                <div class=”image-box”>
+                    <img src="<%= product.image%>" height="200px">
+                </div>
+
+                <div class=”about”></div>
+                    <p class=”title”> <%= product.name %> </p>
+                    <p class=”subtitle”> Quantity : <%= cart.quantity %> </p>
+                </div>
+
+                <form action="/user/quantity/<%= currentUser._id %>/<%= cart._id %>" method="POST" enctype="multipart/form-data">
+                    <button type="submit" class="btn btn-primary">Change</button>
+                </form>
+
+                <form action="/user/remove/<%= currentUser._id %>/<%= cart._id %>" method="POST" enctype="multipart/form-data">
+                    <button type="submit" class="btn btn-primary">Remove</button>
+                </form>
+
+            </div>
+
+                <div class=”counter”></div>
+                <div class=”prices”></div>
+            </div>
+
+        <% } %>
+            
+    <% }) %>
+<% }) %>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,45 @@
+<%- include("../partials/header.ejs") %>
+
+<h1>Hi <%= user.username%></h1>
+
+<% if(currentUser && currentUser.isAdmin) { %>
+    <h2>You are admin</h2>
+<% } %>
+
+<img src="<%= user.profileImage %>" height="300px">
+
+<!-- <p>
+    <a href="mailto: <%= user.email %>"><%= user.email %></a>
+</p> -->
+
+
+
+<h2>
+    My Account
+</h2>
+
+<p>
+    <a href="/user/<%= currentUser._id %>/profile">Profile</a>
+</p>
+
+<p>
+    <a href="/user/<%= currentUser._id %>/delivery">Delivery Address</a>
+</p>
+
+<p>
+    <a href="#">Payment Method</a>
+</p>
+
+<h2>
+    My purchase
+</h2>
+
+<p>
+    <a href="#">History</a>
+</p>
+
+<p>
+    <a href="#">Wishlist</a>
+</p>
+
+<%- include("../partials/footer.ejs") %>

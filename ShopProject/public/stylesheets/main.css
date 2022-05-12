@@ -2,6 +2,20 @@
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+textarea
+{  
+    font-family: 'Roboto Condensed', sans-serif; 
+}
+
+.textarea-product{
+    border: none;
+    resize: none;
+}
+
+#delete-form{
+    display: inline;
+}
+
 .index-image{
     object-fit: contain;
 }
@@ -57,4 +71,92 @@
     font-weight: 600;
     border-radius: 3px;
     text-transform: uppercase
+}
+
+.input-qty-button{
+    /* border:none; */
+    background-color: #b5d5b6;
+    color: white;
+    height:40px;
+    width:40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.input-qty-button::hover{
+    background-color:rgb(60, 0, 128);
+}
+
+#input-count{
+    background-color: #b5d5b6;
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 12px 12px;
+    text-align: center;
+    width: 50px;
+
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+.Cart-Container{
+    width: 70%;
+    height: 85%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0px 25px 40px #1687d933;
+
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.Cart-Items{
+    margin: auto;
+    width: 90%;
+    height: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+   
+.image-box{
+    width: 15%;
+    text-align: center;
+}
+
+.about{
+    height: 100%;
+
+}
+   
+.title{
+    padding-top: 5px;
+    line-height: 10px;
+    font-size: 32px;
+    font-family: ‘Open Sans’;
+    font-weight: 800;
+    color: #202020;
+}
+   
+.subtitle{
+    line-height: 10px;
+    font-size: 18px;
+    font-family: ‘Open Sans’;
+    font-weight: 600;
+    color: #909090;
 }

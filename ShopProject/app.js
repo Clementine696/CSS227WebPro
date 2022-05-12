@@ -7,18 +7,22 @@ const	express		= require("express"),
 		passport	= require('passport'),
 		LocalStrategy = require('passport-local');
 		flash		= require('connect-flash'),
+		methodOverride = require('method-override'),
 		Product       = require('./models/product'),	//Database
 		User		= require('./models/user'),		//Database
+		Address 	= require('./models/address'),		//Database
 		seedDB		= require('./seeds');			//Database
 
 const	indexRoutes = require('./routes/index'),
 		productRoutes = require('./routes/products');
+		userRoutes = require('./routes/user');
 		// commentRoutes = require('./routes/comments');
 
 mongoose.connect('mongodb://localhost/ProjectShop');
 app.set("view engine","ejs");
 app.use(express.static("./public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(methodOverride('_method'));
 app.use(flash());
 //If finished, jest comment this
 // seedDB(); 
@@ -44,6 +48,7 @@ app.use(function(req, res, next){
 
 app.use('/', indexRoutes);
 app.use('/products', productRoutes);
+app.use('/user', userRoutes);
 // app.use('/prints/:id/comments', commentRoutes);
 
 app.listen(3000, function(){
